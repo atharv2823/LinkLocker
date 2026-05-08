@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  links Link[]
+}
+
+model Link {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  url         String
+  title       String
+  description String?
+  isFavorite  Boolean  @default(false)
+  dateAdded   String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String   @db.ObjectId
+}
