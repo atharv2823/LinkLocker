@@ -160,10 +160,10 @@ export default function Page() {
       {/* Sidebar */}
       <aside className="relative z-10 w-72 border-r border-white/5 bg-black/20 backdrop-blur-xl flex flex-col">
         <div className="p-6 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <div className="w-8 h-8 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
             <LinkIcon size={16} className="text-white" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">LinkLocker</h1>
+          <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white to-zinc-400">LinkLocker</h1>
         </div>
 
         <div className="px-4 pb-4">
@@ -230,7 +230,7 @@ export default function Page() {
         {/* User Profile Mockup */}
         <div className="p-4 border-t border-white/5 mt-auto">
           <div className="flex items-center gap-3 px-2 py-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500" />
+            <div className="w-8 h-8 rounded-full bg-linear-to-tr from-purple-500 to-pink-500" />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium truncate">User</p>
               <p className="text-xs text-zinc-500 truncate">Pro Plan</p>
