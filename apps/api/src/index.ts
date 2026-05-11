@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Express } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 
 dotenv.config();
 
-const app = express();
+const app: Express = express();
 const port = process.env.PORT || 5000;
 const prisma = new PrismaClient();
 
@@ -110,6 +110,6 @@ app.patch('/api/links/:id/favorite', async (req: Request, res: Response) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+
+
+export default app;
