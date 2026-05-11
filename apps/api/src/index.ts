@@ -110,6 +110,10 @@ app.patch('/api/links/:id/favorite', async (req: Request, res: Response) => {
   }
 });
 
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
 
-
-export default app;
+export default app; 

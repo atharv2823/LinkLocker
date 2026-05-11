@@ -19,8 +19,6 @@ import { Button } from "@workspace/ui/components/button";
 type Category = { id: string; name: string };
 type LinkItem = { id: string; url: string; title: string; description: string; categoryId: string; dateAdded: string; isFavorite: boolean };
 
-const API_BASE_URL = "http://localhost:5000/api";
-
 export default function Page() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [links, setLinks] = useState<LinkItem[]>([]);
@@ -30,8 +28,8 @@ export default function Page() {
     const fetchData = async () => {
       try {
         const [catsRes, linksRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/categories`),
-          fetch(`${API_BASE_URL}/links`)
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/categories`), 
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/links`)
         ]);
         if (catsRes.ok) {
           setCategories(await catsRes.json());
@@ -76,9 +74,9 @@ export default function Page() {
   const handleAddLink = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newUrl || !newTitle) return;
-
+ 
     try {
-      const res = await fetch(`${API_BASE_URL}/links`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/links`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -107,7 +105,7 @@ export default function Page() {
     if (!newCategoryName) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/categories`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/categories`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: newCategoryName })
@@ -129,7 +127,7 @@ export default function Page() {
     // Optimistic update
     setLinks(links.map(link => link.id === id ? { ...link, isFavorite: !link.isFavorite } : link));
     try {
-      await fetch(`${API_BASE_URL}/links/${id}/favorite`, { method: "PATCH" });
+      await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/links/${id}/favorite`, { method: "PATCH" });
     } catch (error) {
       console.error("Failed to toggle favorite", error);
       // Revert on failure
@@ -142,7 +140,7 @@ export default function Page() {
     const previousLinks = [...links];
     setLinks(links.filter(link => link.id !== id));
     try {
-      const res = await fetch(`${API_BASE_URL}/links/${id}`, { method: "DELETE" });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/links/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Delete failed");
     } catch (error) {
       console.error("Failed to delete link", error);
